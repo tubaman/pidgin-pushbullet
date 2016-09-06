@@ -1,2 +1,0 @@
-pidgin-pushbullet_0.1-1_amd64.deb:
-	sudo checkinstall -D --pkgname="pidgin-pushbullet" --pkgversion=0.1 --pkgrelease=1 --pkgsource=https://github.com/EionRobb/pidgin-pushbullet --maintainer=tubaman@fattuba.com --provides=pidgin-pushbullet --requires=libpurple0

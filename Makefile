@@ -14,7 +14,11 @@ PRPL_LIBNAME=${PRPL_NAME}
 PUSHBULLET_SOURCES = \
 	libpushbullet.c 
 
-.PHONY:	all clean install
+PKG_VERSION=0.1
+PKG_RELEASE=1
+PKG_NAME=pidgin-pushbullet_$(PKG_VERSION)-$(PKG_RELEASE)_amd64.deb
+
+.PHONY:	all clean install package
 all: ${PRPL_NAME}
 install:
 	mkdir -m $(DIR_PERM) -p $(DESTDIR)$(PLUGIN_DIR_PURPLE)
@@ -30,3 +34,7 @@ clean:
 
 ${PRPL_NAME}: ${PUSHBULLET_SOURCES}
 	${COMPILER} -Wall -I. -g -O2 -fPIC -pipe ${PUSHBULLET_SOURCES} -o $@ ${LIBPURPLE_CFLAGS} ${LIBPURPLE_LIBS} -shared
+
+package: ${PKG_NAME}
+${PKG_NAME}: ${PRPL_NAME}
+	sudo checkinstall -D --pkgname="pidgin-pushbullet" --pkgversion=${PKG_VERSION} --pkgrelease=${PKG_RELEASE} --pkgsource=https://github.com/EionRobb/pidgin-pushbullet --maintainer=tubaman@fattuba.com --provides=pidgin-pushbullet --requires=libpurple0
